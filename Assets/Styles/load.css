@@ -1,0 +1,21 @@
+﻿#load {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    -webkit-transform: translate(-50%, -50%);
+    opacity: 0.85;
+    border-radius: 20px;
+}
+
+    #load img {
+        position: fixed;
+        width: 100px;
+        height: 100px;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+    }

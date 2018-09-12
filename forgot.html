@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Fixed Assets</title>
+    <!-- Bootstrap -->
+    <link href="http://www.dpsk12.org/bootstrap-320/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://www.dpsk12.org/test/bootstrap-template/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="333216410581-ohkep24ipnf2ibslqlk06cle8rh7pkno.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link href="Assets/Styles/load.css" rel="stylesheet">
+</head>
+<body>
+    <div id="load" style="display: none;"><img src="Assets/loading.gif" /></div>
+    <div class="container-fluid" style="max-width:1260px">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" id="logo" style="background-color:transparent"><a href="http://www.dpsk12.org"><img src="http://www.dpsk12.org/test/bootstrap-template/images/dps_logo.png" alt="Denver Public Schools" class="logo" /></a></div>
+            <div id="title">Fixed Assets</div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Navigation -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 nopadding">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="http://www.dpsk12.org">DPS</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="default.html">New Form</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="admin.html">Update</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="http://enterprisemanagement.dpsk12.org/" data-toggle="dropdown">
+                                        Enterprise Management Department
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/">Enterprise Management Department</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/contact-us/">Contact Information</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/">Fixed Assets</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/property-control/">Property Control</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav" style="float: right;">
+                                <li><div><a href="default.html" style="margin-top: 7px;" class="btn btn-info">Create Form</a></div></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Content -->
+        <div class="row row-eq-height">
+
+            <div class="col-md-1"></div>
+            <!-- Left Column -->
+            <div class="col-md-10 column-height" style="background-color:#fff; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+                <div id="alt-title">Login</div>
+
+                <div class="container-fluid">
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <form>
+                            <h1 style="text-align: center;">Forgot your password?</h1>
+                            <p id="errors">Enter your username and email into the boxes. If our records match, an email with a temporary password will be sent to you.</p>
+                            <div class="form-group row">
+                                <input class="form-control" type="text" id="username" placeholder="Username" required />
+                            </div>
+                            <div class="form-group row">
+                                <input class="form-control" type="email" id="email" placeholder="Email" required />
+                            </div>
+                            <div class="form-group row">
+                                <div style="float: right" align="right">
+                                    <input align="right" type="button" value="Submit" class="btn btn-primary" onclick="checkLogin()" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12"> &#160 </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-md-12 footer">
+            <p class="links">
+                <a href="http://communications.dpsk12.org/aboutdps.html">About DPS</a> | <a href="http://communications.dpsk12.org/departments.html">Departments</a> | <a href="http://www.dpsk12.org/numbers.shtml">Contact Us</a> | <a href="http://www.dpsk12.org/schoollist">Schools</a> | <a href="http://communications.dpsk12.org/mydps.html">myDPS Sign-up</a> | <a href="http://board.dpsk12.org">Board of Education</a> | <a href="https://webmail.dpsk12.org">DPS Web Mail</a><br />
+                <a href="http://careers.dpsk12.org/">Work for DPS</a>
+            </p>
+            <p>
+                <a href="mailto:info@dpsk12.org">info@dpsk12.org</a> | 720-423-3200 | 900 Grant Street Denver, CO 80203
+            </p>
+            <p>
+                &#169;2014 Denver Public Schools
+            </p>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://www.dpsk12.org/bootstrap-320/js/bootstrap.min.js"></script>
+    <script src="Scripts/forgot.js"></script>
+
+</body>
+</html>

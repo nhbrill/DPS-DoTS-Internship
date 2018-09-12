@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="example/vendor/jquery-1.9.0.min.js" type="text/javascript"></script>
+<script src="dist/quagga.js" type="text/javascript"></script>
+	<script type="application/javascript">
+function decode(source) {
+	var barcode = 0;
+	Quagga.decodeSingle({
+		decoder: {
+		readers: ["code_39_reader"] // List of active readers
+		},
+		locate: true, // try to locate the barcode in the image
+		src: source // or 'data:image/jpg;base64,' + data
+		}, function(result){
+		if(result.codeResult) {
+		console.log(result.codeResult.code);
+		barcode = result.codeResult.code;
+		} else {
+		console.log("error");
+		}
+	});
+
+	$("#barcode").val(barcode);
+}
+	</script>
+</head>
+<body onload="decode('barcode.jpeg')">
+
+<script src="https://serratus.github.io/quaggaJS/javascripts/scale.fix.js"></script>
+</body>
+</html>

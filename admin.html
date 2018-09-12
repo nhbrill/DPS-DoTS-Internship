@@ -1,0 +1,478 @@
+﻿<!--Admin page used to edit forms-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DPS Bootstrap Template</title>
+    <!-- Bootstrap -->
+    <link href="Assets/Styles/style.css" rel="stylesheet">
+    <link href="http://www.dpsk12.org/bootstrap-320/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://www.dpsk12.org/test/bootstrap-template/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.js"></script>
+    <style>
+        @media (max-width: 767px) {
+            #tbo td {
+                width: 100%;
+                float: left;
+                clear: left
+            }
+        }
+
+        @media(max-width: 992px) {
+            h1 {
+                margin-top: 0;
+            }
+            .col-md-10 {
+                padding-top: 10px;
+            }
+        }
+    </style>
+    <link href="Assets/Styles/load.css" rel="stylesheet">
+</head>
+<body onload="checkAuth('api/values/')">
+    <div id="load" style="display: none;"><img src="Assets/loading.gif" /></div>
+    <div class="container-fluid" style="max-width:1260px">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" id="logo" style="background-color:transparent"><a href="http://www.dpsk12.org"><img src="http://www.dpsk12.org/test/bootstrap-template/images/dps_logo.png" alt="Denver Public Schools" class="logo" /></a></div>
+            <div id="title">Fixed Assets</div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Navigation -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 nopadding">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="http://www.dpsk12.org">DPS</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="default.html">New Form</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="admin.html">Update</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="http://enterprisemanagement.dpsk12.org/" data-toggle="dropdown">
+                                        Enterprise Management Department
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/">Enterprise Management Department</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/contact-us/">Contact Information</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/">Fixed Assets</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/property-control/">Property Control</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav" style="float: right;">
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" href="#" class="dropdown-toggle"><span id="user"></span><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a id="userLink" href="user.html">Profile</a></li>
+                                        <li><a id="signOut" onclick="signOut()">Sign Out</a></li>
+                                    </ul>
+                                </li>
+                                <li><div><a href="default.html" style="margin-top: 7px;" class="btn btn-info">Create Form</a></div></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Content -->
+        <div class="row row-eq-height">
+
+            <div class="col-md-1"></div>
+
+            <!-- Left Column -->
+            <div class="col-md-10 column-height" style="background-color: white; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+                <div id="alt-title">Fixed Assets</div>
+                <div id="pageOne">
+                <p id="errors" style="color: red; display: none;">You must be an admin to view/edit forms. Please contact an administrator to gain admin status.</p>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+                    <script src="Scripts/fileBinding.js"></script>
+                    <!--Title for Fixed Assets sheets by the enterprise managment department-->
+                    <form id="end" class="telko">
+                        <h1 class="title">Update Form</h1>
+<p class="preText">
+<a href="http://enterprisemanagement.dpsk12.org/"><b>Enterprise Management Department</b></a><br />
+<a href="https://www.dpsk12.org/"><i>Denver Public Schools</i></a><br />
+<b>Equipment Activity Request Form</b>
+</p>
+                        <div align="center">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="documents" class="form-control"></select>
+                                    <div class="input-group-btn">
+                                        <input style="margin-left: 10px;" type="button" value="Go" onclick="listChange()" class="btn btn-primary">
+                                        <input style="margin-left: 10px;" type="button" value="Reload" onclick="window.location.reload()" class="btn btn-primary">
+                                        <div class="container-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p id="item1"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="color: #024d7c; font-weight: bold;"><span id="needsApproved"></span> form(s) need to be approved by an admin.</p>
+                        <!--end Title begin Section One on 'rows' -->
+                        <hr class="style" />
+                        <div data-bind="with: rows">
+                            <table border="1" id="tbo" align="center" class="table table-bordered">
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> School/Department:</label>
+                                            <div class="col-xs-8">
+                                                <select id="sds" class="form-control" data-bind="value: school" required></select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Site Code: </label>
+                                            <div class="col-md-4"><input class="form-control" data-bind="value: siteCode" maxlength="4" required /></div>
+                                            <label class="col-md-1 control-label all"> Date: </label>
+                                            <div class="col-md-3"><input type="date" class="form-control" data-bind="value: dateMain" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all">  Document #:</label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: documentNumber" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all">  FAD DOC #: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: fadDoc" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--end Section One begin Section Two on 'devise'' -->
+                        <div>
+                            <table align="center" id="tbo" class="table table-bordered">
+                                <tbody data-bind="foreach: devise">
+                                    <tr>
+                                        <td><input placeholder="Barcode" data-bind='value: barCode' class="form-control barcode" maxlength="10" pattern="^\d{10}$" data-toggle="tooltip" title="Bar Code" required /><input class="files all" type="file" accept="image/*;capture=camera" onchange="readURL(this)" /></td>
+                                        <td><input placeholder="Item Description" data-bind='value: itemDescription' class="form-control" data-toggle="tooltip" title="Item Description" required /></td>
+                                        <td>
+                                            <input placeholder="Make" data-bind='value: make' class="form-control" list="deModels" data-toggle="tooltip" title="Make" required />
+                                            <datalist id="deModels">
+                                                <option value="3M"></option>
+                                                <option value="Alphasmart"></option>
+                                                <option value="Android"></option>
+                                                <option value="Apple"></option>
+                                                <option value="Belkin"></option>
+                                                <option value="Canon"></option>
+                                                <option value="Casio"></option>
+                                                <option value="Cisco"></option>
+                                                <option value="Compaq"></option>
+                                                <option value="Dell"></option>
+                                                <option value="Google"></option>
+                                                <option value="HP"></option>
+                                                <option value="IBM"></option>
+                                                <option value="Intel"></option>
+                                                <option value="Lenovo"></option>
+                                                <option value="LG"></option>
+                                                <option value="Microsoft"></option>
+                                                <option value="Microtek"></option>
+                                                <option value="Mimio"></option>
+                                                <option value="Motorola"></option>
+                                                <option value="Nokia"></option>
+                                                <option value="Panasonic"></option>
+                                                <option value="Planar"></option>
+                                                <option value="Promethean"></option>
+                                                <option value="Qualcomm"></option>
+                                                <option value="Rheem"></option>
+                                                <option value="RCA"></option>
+                                                <option value="Samsung"></option>
+                                                <option value="Sharp"></option>
+                                                <option value="Sony"></option>
+                                                <option value="TI"></option>
+                                                <option value="Toshiba"></option>
+                                            </datalist>
+                                        </td>
+                                        <td><input placeholder="Model" data-bind='value: model' class="form-control" data-toggle="tooltip" title="Model" required /></td>
+                                        <td><input placeholder="Serial #" data-bind='value: serial' class="form-control" data-toggle="tooltip" title="Serial #" required /></td>
+                                        <td><label class="control-label all"> Serviceable? </label> <input type="checkbox" data-bind='checked: serviceable' id="check" /></td>
+                                        <td><button type="button" class="btn btn-warning" data-bind='click: $root.removeDevise'>-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="btnRight">
+                            <button type="button" data-bind='click: addTab' id="btnRight" class="btn btn-success" style="margin-bottom: 20px">Add +</button>
+                        </div>
+                        <!--end Section Two begin Section Three on 'rows' -->
+                        <div data-bind="with: rows">
+                            <table id="tbo" align="center" class="table table-bordered ">
+                                <tr>
+                                    <td align="center">
+                                        <p class="all"><b><u>Please Check Transaction</u></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Transfer To:  </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: transfer" placeholder="Address" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Requires Warehouse Action: </label>
+                                            <div class="col-xs-8"><input type="checkbox" class="checkcheck" data-bind="checked: warehouse" /> <label class="control-label all" data-bind="text: warehouse() ? 'Yes' : 'No'"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Warranty Replacement #: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: warranty" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Stolen: Police case #: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: policeCase" onchange="collapsep()" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: policeDate" class="form-control" onchange="collapsep()" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <div class="collapse">
+                                                <label class="col-xs-4 control-label all"><em>(NOTE: Attach Copy of Police Report to EAR)</em></label>
+                                                <div class="col-xs-8 all"><input type="file" data-bind="fileInput: policeFile" required /></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> For: </label>
+                                            <div class="col-xs-2"><input type="radio" name="radio" class="checkcheck" value="neither" data-bind="checked: forRD" required/><label class="control-label all">Neither</label></div>
+                                            <div class="col-xs-3"><input type="radio" name="radio" class="checkcheck" value="retirement" data-bind="checked: forRD" /><label class="control-label all">Retirement</label></div>
+                                            <div class="col-xs-3"><input type="radio" name="radio" class="checkcheck" value="disposal" data-bind="checked: forRD" /><label class="control-label all">Disposal</label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <textarea class="form-control" style="resize:none" data-bind="value: remarks" placeholder="Remarks:" cols="50" rows="4" maxlength="500" required></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-12 control-label all"> Bar Code Request: </label>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> New Purchase/PO#: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: purchase" required /> </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Credit Card/Vender Invoice #: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: credit" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> School/Department Point of Contact: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: contact" placeholder="Name" required/></div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Phone Number: </label>
+                                            <div class="col-xs-8"><input class="form-control" maxlength="10" type="tel" data-bind="value: phone" pattern="^\d{3}\d{3}\d{4}$"  data-toggle="tooltip" title="Phone number should be ten numbers and contain no symbols" required/> </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Email: </label>
+                                            <div class="col-xs-8"><input id="email" class="form-control" type="email" data-bind="value: email" placeholder="example@email.com" required/></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Transactions entered into records by: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: recordsBy" placeholder="Name" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: recordsDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <p class="all">For warehouse questions call (720)423-4185. Please retain a copy for your records. <strong>Note: This form is intended for permanent transactions only.</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="form-group" align="center">
+                                        <p class="all">TO BE COMPLETED BY THE FIXED ASSETS DEPARTMENT
+                                    </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Approved By: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: approved" placeholder="Name" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: aDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Received By: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: received" placeholder="Name" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: rDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Delivered By: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: deliveredBy" placeholder="Name" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: deliveredDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--Agree button prompting JSON saving button and checking requirements-->
+                                        <p class="all"><button class="btn btn-success" onclick="rateIt()">Agree</button> By clicking this button, you agree to the terms and policies of the form and any officials representing the enterprise management department.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                    <!--end Section Three begin JSON Saving Data -->
+                    <a class="btn btn-primary toggleable" onclick="binder()" id="btnSave" disabled> Update Form </a>
+                    <button class="btn btn-info" onclick="printer()">Print Form</button>
+                    <a class="btn btn-danger toggleable" onclick="deleteForm()" id="btnSave" disabled> Delete Form </a>
+                    <hr class="style" />
+                    <!--textarea's do not display during final product -->
+                    <!--<form id="vals">
+                                            <div id="disNon">
+                    <textarea data-bind='value: lastSavedJson' rows='10' id="devise" cols='100' disabled='disabled'></textarea>
+                    <textarea id="bindered" rows='10' cols='100' disabled='disabled'></textarea>
+                                            </div>
+                                        </form>-->
+
+                </div>
+                </div>
+            <div id="pageTwo" style="display: none; background-color:#fff;" align="center" class="col-md-10">
+                <table align="center">
+                    <tr>
+                        <td align="center">
+                            &#160
+                            <br />
+                            <p id="submitMsg" style="color: #337ab7; font-size: 150%;">Your form has successfully been submited.</p>
+                            <a href="default.html" class="btn btn-primary">New Form</a>
+                            <a href="admin.html" class="btn btn-primary">Update</a>
+                            <a href="login.html" class="btn btn-primary">Login</a>
+                            <br />
+                            &#160
+                            <br />
+                            &#160
+                            <br />
+                            &#160
+                            <br />
+                            &#160
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+   </div>
+        <div class="col-md-1"></div>
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-md-12 footer">
+            <p class="links">
+                <a href="http://communications.dpsk12.org/aboutdps.html">About DPS</a> | <a href="http://communications.dpsk12.org/departments.html">Departments</a> | <a href="http://www.dpsk12.org/numbers.shtml">Contact Us</a> | <a href="http://www.dpsk12.org/schoollist">Schools</a> | <a href="http://communications.dpsk12.org/mydps.html">myDPS Sign-up</a> | <a href="http://board.dpsk12.org">Board of Education</a> | <a href="https://webmail.dpsk12.org">DPS Web Mail</a><br />
+                <a href="http://careers.dpsk12.org/">Work for DPS</a>
+            </p>
+            <p>
+                <a href="mailto:info@dpsk12.org">info@dpsk12.org</a> | 720-423-3200 | 900 Grant Street Denver, CO 80203
+            </p>
+            <p>
+                &#169;2014 Denver Public Schools
+            </p>
+        </div>
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="Scripts/admin.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://www.dpsk12.org/bootstrap-320/js/bootstrap.min.js"></script>
+    <!--<script src="login.js"></script>-->
+</body>
+</html>

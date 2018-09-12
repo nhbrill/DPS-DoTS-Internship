@@ -1,0 +1,631 @@
+﻿<!--Default page used to create forms-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Form | Fixed Assets</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="http://www.dpsk12.org/bootstrap-320/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://www.dpsk12.org/test/bootstrap-template/style.css" rel="stylesheet">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Assets/Styles/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.js"></script>
+    <style>
+        /*resizing CSS code for mobile edition*/
+        @media (max-width: 767px) {
+            #tbo td {
+                width: 100%;
+                float: left;
+                clear: left
+            }
+            .col-md-3 {
+                padding-top: 10px;
+            }
+        }
+       
+        @media(max-width: 992px) {
+            h1 {
+                margin-top: 0;
+            }
+
+            .col-md-10 {
+                padding-top: 10px;
+            }
+        }
+    </style>
+    <link href="Assets/Styles/load.css" rel="stylesheet">
+</head>
+<body onload="userIn()">
+    <div id="load" style="display: none;"><img src="Assets/loading.gif" /></div>
+    <div class="container-fluid" style="max-width:1260px">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10" id="logo" style="background-color:transparent"><a href="http://www.dpsk12.org"><img class="logo" alt="Denver Public Schools" src="http://www.dpsk12.org/test/bootstrap-template/images/dps_logo.png"></a></div>
+            <div id="title">Fixed Assets</div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Navigation -->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 nopadding">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="http://www.dpsk12.org">DPS</a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="default.html">New Form</a></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="admin.html">Update</a></li>
+                                <li class="dropdown">
+                                <a class="dropdown-toggle" href="http://enterprisemanagement.dpsk12.org/" data-toggle="dropdown">
+                                    Enterprise Management Department
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="http://enterprisemanagement.dpsk12.org/">Enterprise Management Department</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://enterprisemanagement.dpsk12.org/contact-us/">Contact Information</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/">Fixed Assets</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://enterprisemanagement.dpsk12.org/fixed-assets/property-control/">Property Control</a>
+                                    </li>
+                                </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav" style="float: right;">
+                                <li id="dd2" class="dropdown">
+                                    <a data-toggle="dropdown" href="#" class="dropdown-toggle"><span id="user"></span><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a id="userLink" href="user.html">Profile</a></li>
+                                        <li><a id="signOut" onclick="signOut()">Sign Out</a></li>
+                                    </ul>
+                                </li>
+                                <li><div><a href="default.html" style="margin-top: 7px;" class="btn btn-info">Create Form</a></div></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- Content -->
+        <div class="row row-eq-height">
+            <div class="col-md-1"></div>
+            <!-- Left Column -->
+            <div class="col-md-10 column-height" style="background-color: white; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+                <div id="alt-title">Fixed Assets</div>
+                <div id="pageOne">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+                <script src="Scripts/fileBinding.js"></script>
+                <!--Title for Fixed Assets sheets by the enterprise managment department-->
+                    <form id="end" action="saveit" class="telko">
+                        <h1 class="title">Create Form</h1>
+<p class="preText">
+<a href="http://enterprisemanagement.dpsk12.org/"><b>Enterprise Management Department</b></a><br />
+<a href="https://www.dpsk12.org/"><i>Denver Public Schools</i></a><br />
+<b>Equipment Activity Request Form</b>
+</p>
+                        <!--end Title begin Section One on 'rows' -->
+                        <hr class="style" />
+                        <div data-bind="with: rows">
+                            <table border="1" id="tbo" align="center" class="table table-bordered">
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> School/Department:</label>
+                                            <div class="col-xs-8">
+                                                <!--<input placeholder="Make" data-bind='value: make' class="form-control" list="deModels" data-toggle="tooltip" title="Make" required />-->
+                                                
+                                                    <select id="sds" class="form-control" onchange="setSite()" data-bind="value: school" required></select>
+                                        </div>
+                                            </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Site Code: </label>
+                                            <div class="col-md-4"><input class="form-control" data-bind="value: siteCode"  maxlength="4" id="plas" /></div>
+
+                                            <label class="col-md-1 control-label all"> Date: </label>
+                                            <div class="col-md-3"><input id="dateMain" type="date" class="form-control" data-bind="value: dateMain" required /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all">  Document #:</label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: documentNumber"  maxlength="100" /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all">  FAD DOC #: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: fadDoc" maxlength="100" /></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--end Section One begin Section Two on 'devise'' -->
+                        <div>
+                            <table align="center" id="tbo" class="table table-bordered">
+                                <tbody data-bind="foreach: devise">
+                                    <tr>
+                                        <td><input placeholder="Barcode" data-bind='value: barCode' class="form-control barcode" maxlength="10" pattern="^\d{10}$" data-toggle="tooltip" title="Bar Code" required /><input class="files all" type="file" accept="image/*;capture=camera" onchange="readURL(this)" /></td>
+                                        <td><input placeholder="Item Description" id="TI" data-bind='value: itemDescription' class="form-control" data-toggle="tooltip" title="Item Description"  maxlength="100" required /><a style="color: white;" data-toggle="modal" data-target="#picModal">Find by Image</a>
+                                            <div class="modal fade" id="picModal" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <label class="control-label">Select Picture Based on Items Description</label>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <button data-bind="click: $root.CE" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-phone"></span><br>Cellphone</button>
+                                                            <button data-bind="click: $root.CA" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-camera"></span><br>Camera</button>
+                                                            <button data-bind="click: $root.PR" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-print"></span><br>Printer</button>
+                                                            <button data-bind="click: $root.IT" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-hdd"></span><br>Modem</button>
+                                                            <button data-bind="click: $root.AO" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-headphones"></span><br>Audio</button>
+                                                            <button data-bind="click: $root.TE" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-phone-alt"></span><br>Telephone</button>
+                                                            <button data-bind="click: $root.MY" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-cd"></span><br>Media Player</button>
+                                                            <button data-bind="click: $root.SN" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-blackboard"></span><br>Screen</button>
+                                                            <button data-bind="click: $root.LP" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-lamp"></span><br>Lamp</button>
+                                                            <button data-bind="click: $root.PC" data-dismiss="modal" class="btn btn-default ton"><span class="glyphicon glyphicon-object-align-bottom"></span><br>PC</button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input placeholder="Make" data-bind='value: make' class="form-control" list="deModels" data-toggle="tooltip" title="Make" maxlength="100" required />
+                                            <datalist id="deModels">
+                                                <option value="3M"></option>
+                                                <option value="Alphasmart"></option>
+                                                <option value="Android"></option>
+                                                <option value="Apple"></option>
+                                                <option value="Belkin"></option>
+                                                <option value="Canon"></option>
+                                                <option value="Casio"></option>
+                                                <option value="Cisco"></option>
+                                                <option value="Compaq"></option>
+                                                <option value="Dell"></option>
+                                                <option value="Google"></option>
+                                                <option value="HP"></option>
+                                                <option value="IBM"></option>
+                                                <option value="Intel"></option>
+                                                <option value="Lenovo"></option>
+                                                <option value="LG"></option>
+                                                <option value="Microsoft"></option>
+                                                <option value="Microtek"></option>
+                                                <option value="Mimio"></option>
+                                                <option value="Motorola"></option>
+                                                <option value="Nokia"></option>
+                                                <option value="Panasonic"></option>
+                                                <option value="Planar"></option>
+                                                <option value="Promethean"></option>
+                                                <option value="Qualcomm"></option>
+                                                <option value="Rheem"></option>
+                                                <option value="RCA"></option>
+                                                <option value="Samsung"></option>
+                                                <option value="Sharp"></option>
+                                                <option value="Sony"></option>
+                                                <option value="TI"></option>
+                                                <option value="Toshiba"></option>
+                                            </datalist>
+                                        </td>
+                                        <td><input placeholder="Model" data-bind='value: model' class="form-control" data-toggle="tooltip" title="Model" maxlength="100" required /></td>
+                                        <td><input placeholder="Serial #" data-bind='value: serial' class="form-control" data-toggle="tooltip" title="Serial #" maxlength="100" /></td>
+                                        <td><label class="control-label all"> Serviceable? </label> <input type="checkbox" data-bind='checked: serviceable' id="check" /></td>
+                                        <td><button type="button" class="btn btn-warning" data-bind='click: $root.removeDevise'>-</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="btnRight">
+                            <button type="button" data-bind='click: addTab' id="btnRight" class="btn btn-success" style="margin-bottom: 20px">Add +</button>
+                        </div>
+                        <!--end Section Two begin Section Three on 'rows' -->
+                        <div data-bind="with: rows">
+                            <table id="tbo" align="center" class="table table-bordered">
+                                <tr>
+                                   <td align="center">
+                                        <p class="all"><b><u>Please Check Transaction</u></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Transfer To:  </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: transfer" placeholder="Address"  maxlength="250"/></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Requires Warehouse Action: </label>
+                                            <div class="col-xs-8"><input type="checkbox" class="checkcheck" data-bind="checked: warehouse" /> <label class="control-label all" data-bind="text: warehouse() ? 'Yes' : 'No'"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Warranty Replacement PO#: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: warranty"  maxlength="100"/></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Stolen: Police case #: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: policeCase" onchange="collapsep()" maxlength="100" />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: policeDate" class="form-control" onchange="collapsep()" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <div class="collapse">
+                                                <label class="col-xs-4 control-label all"><em>Attach Copy of Police Report</em></label>
+                                                <div class="col-xs-8 all"><input type="file" data-bind="fileInput: policeFile"/></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> For: </label>
+                                            <div class="col-xs-2"><input type="radio" name="radio" class="checkcheck" value="neither" data-bind="checked: forRD" /><label class="control-label all">Neither</label></div>
+                                            <div class="col-xs-3"><input type="radio" name="radio" class="checkcheck" value="retirement" data-bind="checked: forRD" /><label class="control-label all">Retirement</label></div>
+                                            <div class="col-xs-3"><input type="radio" name="radio" class="checkcheck" value="disposal" data-bind="checked: forRD" /><label class="control-label all">Disposal</label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <textarea class="form-control" style="resize:none" data-bind="value: remarks" placeholder="Remarks:" cols="50" rows="4" maxlength="500"  data-toggle="tooltip" title="Remarks" ></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-12 control-label all"> Bar Code Request: </label>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> New Purchase/PO#: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: purchase"  maxlength="100"/> </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Credit Card/Vender Invoice #: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: credit"  maxlength="100"/></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> School/Department Point of Contact: </label>
+                                            <div class="col-xs-8"><input class="form-control" data-bind="value: contact" placeholder="Name"  maxlength="100"/></div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Phone Number: </label>
+                                            <div class="col-xs-8"><input class="form-control" maxlength="10" type="tel" data-bind="value: phone"  pattern="^\d{3}\d{3}\d{4}$" data-toggle="tooltip" title="Phone number should be ten numbers and contain no symbols" /> </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-xs-4 control-label all"> Email: </label>
+                                            <div class="col-xs-8"><input id="email" class="form-control" type="email" data-bind="value: email" placeholder="example@email.com"  maxlength="100"/></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Transactions entered into records by: </label>
+                                            <div class="col-md-4">
+                                                <input class="form-control" data-bind="value: recordsBy" placeholder="Name" maxlength="100" required />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input type="date" data-bind="value: recordsDate" class="form-control" required />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <label class="control-label all">For warehouse questions call (720)423-4185. Please retain a copy for your records.<br />
+                                        <strong>Note: This form is intended for permanent transactions only.</strong></label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group" align="center">
+                                        <label class="control-label all">TO BE COMPLETED BY THE FIXED ASSETS DEPARTMENT</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Approved By: </label>
+                                            <div class="col-md-4">
+                                                <input id="xao" class="form-control" data-bind="value: approved" placeholder="Name" maxlength="100" disabled/>
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input id="xbo" type="date" data-bind="value: aDate" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Received By: </label>
+                                            <div class="col-md-4">
+                                                <input id="xco" class="form-control aoe" data-bind="value: received" placeholder="Name" maxlength="100" disabled />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input id="xdo" type="date" data-bind="value: rDate" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">&#160 </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label all"> Delivered By: </label>
+                                            <div class="col-md-4">
+                                                <input id="xeo" class="form-control" data-bind="value: deliveredBy" placeholder="Name" maxlength="100" disabled />
+                                            </div>
+                                            <label class="col-md-1 control-label all">Date:</label>
+                                            <div class="col-md-3">
+                                                <input id="xfo" type="date" data-bind="value: deliveredDate" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!--Agree button prompting JSON saving button and checking requirements-->
+                                        <p class="all"><button class="btn btn-success" onclick="rateIt()">Agree</button> By clicking this button, you agree to the terms and policies of the form and any officials representing the enterprise management department.</p>
+                                    </td> <!--Agree button can be replaced with an onchange="function()" event on final version-->
+                                </tr>
+                            </table>
+                            </div>
+<!--START OF PAGE THREE-->
+                        <!-- Page three is the receipt formating for the print option after a user saves their form-->
+                            <div id="pageThree">
+                                <h1 class="title">Fixed Assets</h1>
+                                <p style="text-align: center;">
+                                <b>Enterprise Management Department</b><br />
+                                <i>Denver Public Schools</i><br />
+                                <b>Equipment Activity Request Form</b>
+                                </p>
+                                <div data-bind="with: rows">
+                                    <table border="1" bordercolor="black" class="table-bordered">
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> School/Department:</label>
+                                                <label class="col-xs-8 control-label" data-bind="text: school"></label>
+                                                </td>
+                                            </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> Site Code: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: siteCode"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> Date: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: dateMain"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label">  Document #:</label>
+                                                <label class="col-xs-8 control-label" data-bind="text: documentNumber"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label">  FAD DOC #: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: fadDoc"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> Transfer To:  </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: transfer"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label all"> Requires Warehouse Action: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: warehouse() ? 'True' : 'False'"> </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> Warranty Replacement #: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: warranty"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> Stolen: Police case #:  </label>
+                                                <label class="col-xs-4 control-label" data-bind="text: policeCase"></label>
+                                                <label class="col-xs-1 control-label"> Date: </label>
+                                                <label class="col-xs-3 control-label" data-bind="text: policeDate"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label"> For: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: forRD"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <textarea class="form-control" style="resize:none" data-bind="text: remarks" cols="50" rows="4" maxlength="500"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-12 control-label "> Bar Code Request: </label>
+                                                <label class="col-xs-4 control-label"> a.New Purchase/PO#: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: purchase"></label>
+                                                <label class="col-xs-4 control-label"> Credit Card/Vender Invoice #: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: credit"></label>
+                                                <label class="col-xs-4 control-label "> b.Bar Code Labeled by Mistake </label>
+                                                <label class="col-xs-8 control-label "> attach bar code labels </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label "> Point of Contact: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: contact"></label>
+                                                <label class="col-xs-4 control-label "> Phone Number: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: phone"></label>
+                                                <label class="col-xs-4 control-label "> Email: </label>
+                                                <label class="col-xs-8 control-label" data-bind="text: email"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label "> Transactions entered by: </label>
+                                                <label class="col-xs-4 control-label" data-bind="text: recordsBy"></label>
+                                                <label class="col-xs-1 control-label "> Date: </label>
+                                                <label class="col-xs-3 control-label" data-bind="text: recordsDate"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label "> Approved By: </label>
+                                                <label class="col-xs-4 control-label" data-bind="text: approved"></label>
+                                                <label class="col-xs-1 control-label "> Date: </label>
+                                                <label class="col-xs-3 control-label" data-bind="text: aDate"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label "> Received By: </label>
+                                                <label class="col-xs-4 control-label" data-bind="text: received"></label>
+                                                <label class="col-xs-1 control-label "> Date: </label>
+                                                <label data-bind="text: rDate" class="col-xs-3 control-label"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label class="col-xs-4 control-label "> Delivered by: </label>
+                                                <label class="col-xs-4 control-label" data-bind="text: deliveredBy"></label>
+                                                <label class="col-xs-1 control-label "> Date: </label>
+                                                <label data-bind="text: deliveredDate" class="col-xs-3 control-label"></label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+<!--END OF PAGE THREE-->
+
+            <!--end Section Three begin JSON Saving Data -->
+            <button type="button" data-bind='click: save' class="btn btn-primary" onclick="binder()" id="btnSave" disabled> Save Form </button>
+                    <button class="btn btn-danger" type="reset">Reset Form</button>
+                        </form>
+            <hr class="style" />
+            <!--textarea's do not display during final product -->
+            <form id="vals" action="resend">
+                <div id="disNon">
+<textarea data-bind='value: lastSavedJson' rows='10' id="devise" cols='100' disabled='disabled'></textarea>
+<textarea id="bindered" rows='10' cols='100' disabled='disabled'></textarea>
+                </div>
+            </form>
+            </div>
+<!--Page one ends and page two starts. page two's purpose is to provide a concluding menu and statment.-->
+        <div id="pageTwo" align="center">
+            <table align="center">
+                <tr>
+                    <td align="center">
+                        &#160
+                        <br />
+                        <p style="color: #337ab7; font-size: 150%;">Your form has successfully been submited.</p>
+                        <a href="default.html" class="btn btn-primary">New Form</a>
+                        <a href="login.html" class="btn btn-primary">Login</a>
+                        <a href="admin.html" class="btn btn-primary">Update</a>
+                        <button class="btn btn-info" onclick="reciept('pageThree')">Print Form</button>
+                        <br />
+                        &#160
+                        <br />
+                        &#160
+                        <br />
+                        &#160
+                        <br />
+                        &#160
+                    </td>
+                </tr>
+            </table>
+        </div>
+           
+            </div>
+    <div class="col-md-1"></div>
+    </div>
+    </div>
+    <div class="col-md-1"></div>
+    <!-- Footer -->
+    <div class="row">
+    <div width="100%" class="col-md-12 footer">
+        <p class="links">
+            <a href="http://communications.dpsk12.org/aboutdps.html">About DPS</a> | <a href="http://communications.dpsk12.org/departments.html">Departments</a> | <a href="http://www.dpsk12.org/numbers.shtml">Contact Us</a> | <a href="http://www.dpsk12.org/schoollist">Schools</a> | <a href="http://communications.dpsk12.org/mydps.html">myDPS Sign-up</a> | <a href="http://board.dpsk12.org">Board of Education</a> | <a href="https://webmail.dpsk12.org">DPS Web Mail</a><br>
+            <a href="http://careers.dpsk12.org/">Work for DPS</a>
+        </p>
+        <p>
+            <a href="mailto:info@dpsk12.org">info@dpsk12.org</a> | 720-423-3200 | 900 Grant Street Denver, CO 80203
+        </p>
+        <p>
+            ©2014 Denver Public Schools
+        </p>
+    </div>
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="Scripts/default.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://www.dpsk12.org/bootstrap-320/js/bootstrap.min.js"></script>
+</body>
+</html>

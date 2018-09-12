@@ -1,0 +1,93 @@
+﻿/*CSS style for pages: default, admin*/
+/*Changes any text color from black to white.*/
+.all {
+    color: white;
+}
+/*Table style used on all visible tables.*/
+#tbo {
+    width: 100%;
+    background-color: #337ab7;
+}
+/*empty class used for validation purposes.*/
+.telko {
+}
+/*Validation styles for forms with class tan*/
+.tan :invalid {
+    border-color: #a94442;
+    border-width: medium;
+}
+
+.tan :valid {
+    border-color: #3c763d;
+    border-width: medium;
+}
+/*Title text*/
+.title {
+    text-align: center;
+}
+/*Subtitle text*/
+.preText {
+    text-align: center;
+    font-size: 100%;
+    color: black;
+}
+
+#btnRight {
+    text-align: right;
+}
+/*Checkbox styles*/
+.checkcheck {
+    width: 20px;
+    border-radius: 4px;
+    height: 15px;
+}
+
+#check {
+    width: 20px;
+    border-radius: 4px;
+    height: 20px;
+}
+/*used for hiding div's*/
+#disNon {
+    display: none;
+    visibility: hidden;
+}
+/*extras*/
+hr.style {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+tr {
+    border-radius: 2px;
+}
+/*resizes everything to fit mobile*/
+@media (max-width: 767px) {
+    #tbo td {
+        width: 100%;
+        float: left;
+        clear: left
+    }
+
+    .col-md-3 {
+        padding-top: 10px;
+    }
+}
+
+
+@media(max-width: 992px) {
+    h1 {
+        margin-top: 0;
+    }
+
+    .col-md-10 {
+        padding-top: 10px;
+    }
+}
+
+.ton {
+    width: 100px;
+    length: 40px;
+    height: 50px;
+}
